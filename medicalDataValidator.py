@@ -42,4 +42,9 @@ def validate(data):
     isSequence = isinstance(data, (list, tuple))
     isInvalid = False
     
+    # checks whether data is wrong type, prints error message and returns False
+    if not isSequence:
+        print("Invalid format: expected a list or tuple.")
+        return False
     
+   
