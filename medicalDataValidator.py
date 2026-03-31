@@ -47,4 +47,12 @@ def validate(data):
         print("Invalid format: expected a list or tuple.")
         return False
     
-   
+    # checks whether each item in data is a dict, prints error message if not and assigns isInvalid to True
+    for index, dictionary in enumerate(data):
+        if not isinstance(dictionary, dict):
+            print(f"Invalid format: expected a dictionary at position {index}.")
+            isInvalid = True
+            
+    # if isInvalid is True, return False
+    if isInvalid:
+        return False
