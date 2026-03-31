@@ -1,6 +1,6 @@
 # this program validates a set of medical data to ensure that it complies with a set of rules
 
-# create medical data list of dicts, each dict represents a patient
+# var that holds a list of dicts, each dict represents a patient
 medicalRecords = [
     {
         'patientID': 'P1001',
@@ -35,3 +35,11 @@ medicalRecords = [
         'lastVisitID': 'V2304',
     }
 ]
+
+# validate function that checks if data is correct
+def validate(data):
+    # var that stores bool indicating whether data type is correct type (list or tuple)
+    isSequence = isinstance(data, (list, tuple))
+    isInvalid = False
+    
+    
