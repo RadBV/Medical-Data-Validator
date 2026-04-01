@@ -36,6 +36,11 @@ medicalRecords = [
     }
 ]
 
+
+def findInvalidRecords(patientID, age, gender, diagnosis, medications, lastVisitID):
+    constraints = {}
+    return constraints
+
 # validate function that checks if data is correct
 def validate(data):
     ### all variables stored at the top of this function for better readability ###
