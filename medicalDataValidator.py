@@ -37,15 +37,20 @@ medicalRecords = [
     }
 ]
 
-
+# function that checks if all arguments are valid and returns a list of invalid arguments as strings, or empty list if all args are valid
 def findInvalidRecords(patientID, age, gender, diagnosis, medications, lastVisitID):
 
     # dict that checks each value of this function's arguments and makes sure it matches the correct pattern. 
     # key is the name of the arg, value is a bool that is True if arg type/pattern is correct and False if not
     constraints = {
-        "patientID": isinstance(patientID, str) and re.fullmatch("p\d+", patientID, re.IGNORECASE)
+        "patientID": isinstance(patientID, str) and re.fullmatch("p\d+", patientID, re.IGNORECASE), # checks if patientID is a str and matches pattern of "p" followed by digits
+        "age": isinstance(age, int) and age >= 18, # checks if age is an int and at least 18
+        "gender": isinstance(gender, str) and gender.lower() in ("male","female"), # checks if gender is a str and one of two values (two for simplicity)
+        "diagnosis": isinstance(diagnosis, str) or diagnosis is None, # checks if diagnosis is a str or None
+        "medications": isinstance(medications, list) and all([isinstance(med, str) for med in medications]), # checks if medications is a list and all items within are str
+        "lastVisitID": isinstance(lastVisitID, str) and re.fullmatch("v\d+", lastVisitID, re.IGNORECASE) # checks if lastVisitID is a str and matches pattern of "v" followed by digits
     }
-    return constraints
+    return [key for key, value in constraints.items() if not value]
 
 # validate function that checks if data is correct
 def validate(data):
@@ -65,10 +70,14 @@ def validate(data):
         if not isinstance(dictionary, dict):
             print(f"Invalid format: expected a dictionary at position {index}.")
             isInvalid = True
+            continue # if not a dict, skip to next item in data (prevents AttributeError on line 75)
         # checks whether keys in dict match keySet, prints error message if not and sets isInvalid to True
         if set(dictionary.keys()) != keySet:
             print(f"Invalid format: {dictionary} at position {index} has missing and/or invalid keys.")
             isInvalid = True
+            continue # if keys don't match, skip to next item in data (prevents KeyError on line 80)
+        
+        invalidRecords = findInvalidRecords(**dictionary) # var that stores list of invalid args in dict
 
     # if isInvalid is True, return False
     if isInvalid:
