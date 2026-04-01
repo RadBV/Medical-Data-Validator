@@ -38,21 +38,27 @@ medicalRecords = [
 
 # validate function that checks if data is correct
 def validate(data):
-    # var that stores bool indicating whether data type is correct type (list or tuple)
-    isSequence = isinstance(data, (list, tuple))
-    isInvalid = False
+    ### all variables stored at the top of this function for better readability ###
+    isSequence = isinstance(data, (list, tuple)) # var that stores bool indicating whether data type is correct type (list or tuple)
+    isInvalid = False # var that stores bool indicating whether any dict in data is invalid (not a dict)
+    keySet = set(['patientID', 'age', 'gender', 'diagnosis', 'medications', 'lastVisitID'])  # var that stores set of keys required in each dict
     
     # checks whether data is wrong type, prints error message and returns False
     if not isSequence:
         print("Invalid format: expected a list or tuple.")
         return False
     
-    # checks whether each item in data is a dict, prints error message if not and assigns isInvalid to True
+    # iterates through index and dict in enumerated data
     for index, dictionary in enumerate(data):
+        # checks whether each item in data is a dict, prints error message if not and sets isInvalid to True
         if not isinstance(dictionary, dict):
             print(f"Invalid format: expected a dictionary at position {index}.")
             isInvalid = True
-            
+        # checks whether keys in dict match keySet, prints error message if not and sets isInvalid to True
+        if set(dictionary.keys()) != keySet:
+            print(f"Invalid format: {dictionary} at position {index} has missing and/or invalid keys.")
+            isInvalid = True
+
     # if isInvalid is True, return False
     if isInvalid:
         return False
