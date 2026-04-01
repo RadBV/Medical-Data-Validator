@@ -1,4 +1,5 @@
 # this program validates a set of medical data to ensure that it complies with a set of rules
+import re # imports regular expression module for pattern matching
 
 # var that holds a list of dicts, each dict represents a patient
 medicalRecords = [
@@ -38,7 +39,12 @@ medicalRecords = [
 
 
 def findInvalidRecords(patientID, age, gender, diagnosis, medications, lastVisitID):
-    constraints = {}
+
+    # dict that checks each value of this function's arguments and makes sure it matches the correct pattern. 
+    # key is the name of the arg, value is a bool that is True if arg type/pattern is correct and False if not
+    constraints = {
+        "patientID": isinstance(patientID, str) and re.fullmatch("p\d+", patientID, re.IGNORECASE)
+    }
     return constraints
 
 # validate function that checks if data is correct
@@ -73,3 +79,4 @@ def validate(data):
     return True
 
 validate(medicalRecords)
+print(findInvalidRecords(**medicalRecords[0]))
