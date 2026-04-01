@@ -37,6 +37,25 @@ medicalRecords = [
     }
 ]
 
+invalidMedicalRecords = [
+    {
+        'patientI': 'g2223',
+        'age': -2,
+        'gender': 'Female',
+        'diagnosis': 'Hypertension',
+        'medications': ['Lisinopril'],
+        'lastVisitID': 'V2301',
+    },
+    {
+        'patientID': 'p1002',
+        'a': 47,
+        'gender': 'male',
+        'diagnosis': 'Type 2 Diabetes',
+        'medications': ['Metformin', 45],
+        'lastVisitID': 'v2302',
+    },
+]
+
 # function that checks if all arguments are valid and returns a list of invalid arguments as strings, or empty list if all args are valid
 def findInvalidRecords(patientID, age, gender, diagnosis, medications, lastVisitID):
 
@@ -78,6 +97,11 @@ def validate(data):
             continue # if keys don't match, skip to next item in data (prevents KeyError on line 80)
         
         invalidRecords = findInvalidRecords(**dictionary) # var that stores list of invalid args in dict
+        
+        # iterates through invalidRecords, prints error message for each invalid arg and sets isInvalid to True
+        for key in invalidRecords:
+            print(f"Unexpected format {key}: {dictionary[key]} at position {index}.")
+            isInvalid = True
 
     # if isInvalid is True, return False
     if isInvalid:
@@ -87,5 +111,4 @@ def validate(data):
     print("Valid format.")
     return True
 
-validate(medicalRecords)
-print(findInvalidRecords(**medicalRecords[0]))
+validate(invalidMedicalRecords)
