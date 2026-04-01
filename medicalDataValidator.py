@@ -56,3 +56,9 @@ def validate(data):
     # if isInvalid is True, return False
     if isInvalid:
         return False
+    
+    # if all checks pass, print message and return True
+    print("Valid format.")
+    return True
+
+validate(medicalRecords)
