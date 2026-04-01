@@ -100,7 +100,7 @@ def validate(data):
         
         # iterates through invalidRecords, prints error message for each invalid arg and sets isInvalid to True
         for key in invalidRecords:
-            print(f"Unexpected format {key}: {dictionary[key]} at position {index}.")
+            print(f"Unexpected format '{key}: {dictionary[key]}' at position {index}.")
             isInvalid = True
 
     # if isInvalid is True, return False
