@@ -36,7 +36,7 @@ medicalRecords = [
         'lastVisitID': 'V2304',
     }
 ]
-
+# var with same format as above that holds invalid info (additional testcase)
 invalidMedicalRecords = [
     {
         'patientI': 'g2223',
@@ -59,7 +59,7 @@ invalidMedicalRecords = [
 # function that checks if all arguments are valid and returns a list of invalid arguments as strings, or empty list if all args are valid
 def findInvalidRecords(patientID, age, gender, diagnosis, medications, lastVisitID):
 
-    # dict that checks each value of this function's arguments and makes sure it matches the correct pattern. 
+    # dict that checks each value of this function's arguments and makes sure it matches the correct pattern
     # key is the name of the arg, value is a bool that is True if arg type/pattern is correct and False if not
     constraints = {
         "patientID": isinstance(patientID, str) and re.fullmatch("p\d+", patientID, re.IGNORECASE), # checks if patientID is a str and matches pattern of "p" followed by digits
