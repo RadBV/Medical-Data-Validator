@@ -25,7 +25,7 @@ This data validator ensures that all medical records contain valid formatting, d
 - Validates the structure of an entire dataset (must be a `list` or `tuple`)
 - Confirms each record within the dataset is a `dict` with exactly the required keys
 - Enforces strict field rules for all six patient attributes
-- Reports *every* violation across *every* record — not just the first one found
+- Reports *every* violation across *every* record, not just the first one found
 - Uses regex to validate ID formats (`P####` / `V####`), case-insensitive
 
 
