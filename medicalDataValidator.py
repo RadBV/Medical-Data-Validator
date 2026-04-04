@@ -69,7 +69,7 @@ def findInvalidRecords(patientID, age, gender, diagnosis, medications, lastVisit
         "medications": isinstance(medications, list) and all([isinstance(med, str) for med in medications]), # checks if medications is a list and all items within are str
         "lastVisitID": isinstance(lastVisitID, str) and re.fullmatch("v\d+", lastVisitID, re.IGNORECASE) # checks if lastVisitID is a str and matches pattern of "v" followed by digits
     }
-    return [key for key, value in constraints.items() if not value]
+    return [key for key, value in constraints.items() if not value] # returns list of keys in constraints where value is False (invalid data)
 
 # validate function that checks if data is correct
 def validate(data):
