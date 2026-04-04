@@ -12,9 +12,7 @@ A Python program that validates medical data to ensure it complies with a set of
 
 This data validator ensures that all medical records contain valid formatting, data types and all its required fields. Built to practice concepts like error handling, regular expressions, and working with dictionaries and lists in Python.
 
----
-
-## What I Learned
+## 💡 What I Learned
 
 - **Regular expressions** — My first hands-on use of Python's `re` module. Used `re.fullmatch()` with the `re.IGNORECASE` flag to validate ID formats like `P1001` and `V2301` against regex expressions (`'p\d+` and `v\d+` respectively).
 - **`isinstance()`** — Used for checking data types across all fields and their values, validating whether they were ints, strings, lists, etc.
@@ -22,31 +20,51 @@ This data validator ensures that all medical records contain valid formatting, d
 - **List comprehension** — Used to filter invalid fields (e.g. checking that every item in `medications` is a string) and to build the final invalid fields list all in one line.
 - **Single-responsibility functions** — Split validation into two focused functions (`validate` and `findInvalidRecords`) so each does one job and delegates the rest.
 
----
-
 ## Features
 
-Wip
+- Validates the structure of an entire dataset (must be a `list` or `tuple`)
+- Confirms each record within the dataset is a `dict` with exactly the required keys
+- Enforces strict field rules for all six patient attributes
+- Reports *every* violation across *every* record — not just the first one found
+- Uses regex to validate ID formats (`P####` / `V####`), case-insensitive
 
----
 
-## Validation Rules
+## 📋 Validation Rules
 
-Wip
+| Field | Rule |
+|---|---|
+| `patientID` | String matching pattern `P` + digits (e.g. `P1001`) |
+| `age` | Integer, must be 18 or older |
+| `gender` | String, `"male"` or `"female"` (case-insensitive) |
+| `diagnosis` | String or `None` |
+| `medications` | List of strings |
+| `lastVisitID` | String matching pattern `V` + digits (e.g. `V2301`) |
 
----
+## ⚙️ How it Works
 
-## How it Works
+Validation has two layers:
 
-Wip
+**1. The dataset structure is checked:** `validate(data)` confirms that the entire dataset is a sequence (either `list` or `tuple`), and that each element is a dictionary (patient record) containing all six required keys.
 
----
+**2. All fields are checked:** For each patient record that passes the structure check, `findInvalidRecords(...)` is called to test all six fields against the field rules above.
 
-## Usage
+If any validation fails, an error message for that failure will print. If all checks pass, a confirmation for valid format will print.
 
-Wip
+```python
+# Example: a record with an invalid age and a non-string medication
+record = {
+    'patientID': 'P1002',
+    'age': -2,                          # ❌ below minimum age of 18
+    'gender': 'male',
+    'diagnosis': 'Type 2 Diabetes',
+    'medications': ['Metformin', 45],   # ❌ 45 is not a string
+    'lastVisitID': 'V2302',
+}
 
----
+# Output:
+# Unexpected format 'age: -2' at position 0.
+# Unexpected format 'medications: ['Metformin', 45]' at position 0.
+```
 
 # Tech Used
 
