@@ -10,13 +10,17 @@ A Python program that validates medical data to ensure it complies with a set of
 
 ## Overview
 
-Wip
+This data validator ensures that all medical records contain valid formatting, data types and all its required fields. Built to practice concepts like error handling, regular expressions, and working with dictionaries and lists in Python.
 
 ---
 
 ## What I Learned
 
-Wip
+- **Regular expressions** — My first hands-on use of Python's `re` module. Used `re.fullmatch()` with the `re.IGNORECASE` flag to validate ID formats like `P1001` and `V2301` against regex expressions (`'p\d+` and `v\d+` respectively).
+- **`isinstance()`** — Used for checking data types across all fields and their values, validating whether they were ints, strings, lists, etc.
+- **Dictionary unpacking (`**`)** — Passed a dictionary's values as arguments to a function using the double asterisk operator (`findInvalidRecords(**dictionary)`) keeping the code clean and readable.
+- **List comprehension** — Used to filter invalid fields (e.g. checking that every item in `medications` is a string) and to build the final invalid fields list all in one line.
+- **Single-responsibility functions** — Split validation into two focused functions (`validate` and `findInvalidRecords`) so each does one job and delegates the rest.
 
 ---
 
