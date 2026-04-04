@@ -17,7 +17,7 @@ This data validator ensures that all medical records contain valid formatting, d
 - **Regular expressions** — My first hands-on use of Python's `re` module. Used `re.fullmatch()` with the `re.IGNORECASE` flag to validate ID formats like `P1001` and `V2301` against regex expressions (`'p\d+` and `v\d+` respectively).
 - **`isinstance()`** — Used for checking data types across all fields and their values, validating whether they were ints, strings, lists, etc.
 - **Dictionary unpacking (`**`)** — Passed a dictionary's values as arguments to a function using the double asterisk operator (`findInvalidRecords(**dictionary)`) keeping the code clean and readable.
-- **List comprehension** — Used to filter invalid fields (e.g. checking that every item in `medications` is a string) and to build the final invalid fields list all in one line.
+- **List comprehension** — Used to filter invalid fields (checking if any value of the items in `constraints` is `False`) and to build the final invalid fields list all in one line.
 - **Single-responsibility functions** — Split validation into two focused functions (`validate` and `findInvalidRecords`) so each does one job and delegates the rest.
 
 ## Features
